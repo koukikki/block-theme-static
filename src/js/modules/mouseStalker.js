@@ -1,6 +1,15 @@
+import { getDeviceInfo } from "./getDeviceInfo";
 import { gsap } from "gsap";
 
-export const mouseStalker = () => {
+export const setMouseStalker = () => {
+  const deviceInfo = getDeviceInfo();
+  if (deviceInfo.isMobile || deviceInfo.isTablet) {
+    const stalkerElm = document.querySelector('.js-mouseStalker');
+    if (stalkerElm) {
+      stalkerElm.remove();
+    }
+    return;
+  }
   const stalkerElm = document.createElement('div');
   stalkerElm.classList.add('js-mouseStalker', 'l-mouseStalker');
   document.querySelector('.l-siteWrapper').appendChild(stalkerElm);
@@ -24,4 +33,19 @@ export const mouseStalker = () => {
       stalkerElm.classList.remove('is-hover');
     });
   });
+};
+
+export const resizeMouseStalker = () => {
+  const deviceInfo = getDeviceInfo();
+  if (deviceInfo.isMobile || deviceInfo.isTablet) {
+    const stalkerElm = document.querySelector('.js-mouseStalker');
+    if (stalkerElm) {
+      stalkerElm.remove();
+    }
+    return;
+  }
+  const stalkerElm = document.querySelector('.js-mouseStalker');
+  if (stalkerElm) {
+    gsap.set(stalkerElm, {xPercent: -50, yPercent: -50});
+  }
 };
