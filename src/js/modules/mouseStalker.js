@@ -32,6 +32,12 @@ export const setMouseStalker = () => {
     hoverElm.addEventListener('mouseleave', () => {
       stalkerElm.classList.remove('is-hover');
     });
+
+    hoverElm.addEventListener('click', () => {
+      if (hoverElm.tagName !== 'BUTTON') {
+        stalkerElm.classList.add('is-click');
+      }
+    });
   });
 };
 

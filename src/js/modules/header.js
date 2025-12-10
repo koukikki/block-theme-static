@@ -20,3 +20,9 @@ export const header = () => {
     }
   });
 };
+
+export const getHeaderHeight = () => {
+  const headerElm = document.querySelector('header');
+  const headerHeight = headerElm.offsetHeight;
+  document.body.setAttribute('style', `--header-height: ${headerHeight}px`);
+};

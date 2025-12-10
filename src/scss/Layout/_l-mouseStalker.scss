@@ -11,6 +11,7 @@
   left: 0;
   z-index: 99999;
   pointer-events: none;
+  overflow: hidden;
   transition: width 0.2s ease, height 0.2s ease, box-shadow 0.2s ease, backdrop-filter 0.2s ease;
 
   &::after {
@@ -32,6 +33,12 @@
 
     &::after {
       clip-path: circle(96px at 50% 50%);
+    }
+  }
+
+  &.is-click {
+    &::after {
+      content: '!';
     }
   }
 }

@@ -10,13 +10,14 @@
   <body>
     <!-- header.htmlの読み込み -->
     {{> header}}
+    <div class="l-siteWrapper">
+      <main id="swup" class="transition-fade">
+        <h1>{{title}}</h1>
+        <div id="app"></div>
+      </main>
 
-    <main>
-      <h1>{{title}}</h1>
-      <div id="app"></div>
-    </main>
-
-    <!-- footer.htmlの読み込み -->
-    {{> footer}}
+      <!-- footer.htmlの読み込み -->
+      {{> footer}}
+    </div>
   </body>
 </html>
