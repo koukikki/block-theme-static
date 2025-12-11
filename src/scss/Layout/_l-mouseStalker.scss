@@ -37,8 +37,11 @@
   }
 
   &.is-click {
-    &::after {
-      content: '!';
-    }
+    width: 80px;
+    height: 80px;
+
+    // &::after {
+    //   content: '!';
+    // }
   }
 }

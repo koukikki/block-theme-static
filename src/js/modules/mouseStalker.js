@@ -15,6 +15,8 @@ export const setMouseStalker = () => {
   document.querySelector('.l-siteWrapper').appendChild(stalkerElm);
 
   gsap.set(stalkerElm, {xPercent: -50, yPercent: -50});
+  stalkerElm.classList.remove('is-hover');
+  stalkerElm.classList.remove('is-click');
 
   let xTo = gsap.quickTo(stalkerElm, "x", {duration: 0.8, ease: "power3"});
   let yTo = gsap.quickTo(stalkerElm, "y", {duration: 0.8, ease: "power3"});
@@ -34,9 +36,10 @@ export const setMouseStalker = () => {
     });
 
     hoverElm.addEventListener('click', () => {
-      if (hoverElm.tagName !== 'BUTTON') {
-        stalkerElm.classList.add('is-click');
-      }
+      stalkerElm.classList.add('is-click');
+      setTimeout(() => {
+        stalkerElm.classList.remove('is-click');
+      }, 100);
     });
   });
 };

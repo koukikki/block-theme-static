@@ -5,8 +5,13 @@ import { setMouseStalker, resizeMouseStalker } from './modules/mouseStalker.js';
 
 const swup = new Swup();
 header();
-getHeaderHeight();
 setMouseStalker();
+
+swup.hooks.on('page:view', (visit) => {
+  // header();
+  // setMouseStalker();
+});
+
 
 window.addEventListener('resize', () => {
   getHeaderHeight();

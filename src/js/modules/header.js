@@ -6,12 +6,12 @@ export const header = () => {
   });
 
   const navElm = document.querySelector('.js-nav')
-  // const navLinkElm = navElm.querySelectorAll('a')
-  // navLinkElm.forEach(link => {
-  //   link.addEventListener('click', () => {
-  //     document.body.classList.remove('menu-open');
-  //   });
-  // });
+  const navLinkElm = navElm.querySelectorAll('a')
+  navLinkElm.forEach(link => {
+    link.addEventListener('click', () => {
+      document.body.classList.remove('menu-open');
+    });
+  });
 
   // navElmの外側をclickしたら閉じる
   document.addEventListener('click', (event) => {
