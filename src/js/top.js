@@ -1,2 +1,2 @@
-import { pageName } from './modules/console.js';
-pageName('トップページ');
+import { topPickupSlider } from './modules/topPickupSlider.js';
+topPickupSlider();

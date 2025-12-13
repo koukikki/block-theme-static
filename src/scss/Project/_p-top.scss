@@ -1,0 +1,49 @@
+@use '../Global/' as *;
+
+.p-topPickup {
+}
+
+.u-visually-hidden {
+}
+
+.p-topPickup__slider {
+
+  &.splide {
+    width: 80%;
+    max-width: 960px;
+    margin-inline: auto;
+  }
+
+  .splide__track {
+    overflow: visible;
+  }
+
+  .splide__list {
+  }
+
+  .splide__slide {
+    aspect-ratio: 16 / 9;
+    border: 20px solid var(--light-blue);
+    border-radius: 12px;
+  }
+
+  .splide__toggle {
+    width: 16px;
+  }
+
+  .splide__toggle__play {
+  }
+
+  .splide__toggle__pause {
+  }
+
+  .splide__progress {
+  }
+
+  .splide__progress__bar {
+    height: 3px;
+    background-color: unset;
+    background-image: linear-gradient(to right, var(--light-blue) 0%, var(--blue) 100%);
+    border-radius: 3px;
+  }
+}
