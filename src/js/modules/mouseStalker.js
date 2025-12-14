@@ -10,9 +10,12 @@ export const setMouseStalker = () => {
     }
     return;
   }
-  const stalkerElm = document.createElement('div');
-  stalkerElm.classList.add('js-mouseStalker', 'l-mouseStalker');
-  document.querySelector('.l-siteWrapper').appendChild(stalkerElm);
+  let stalkerElm = document.querySelector('.js-mouseStalker');
+  if (!stalkerElm) {
+    stalkerElm = document.createElement('div');
+    stalkerElm.classList.add('js-mouseStalker', 'l-mouseStalker');
+    document.querySelector('body').appendChild(stalkerElm);
+  }
 
   gsap.set(stalkerElm, {xPercent: -50, yPercent: -50});
   stalkerElm.classList.remove('is-hover');

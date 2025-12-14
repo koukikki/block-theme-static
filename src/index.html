@@ -18,31 +18,52 @@
           <div class="p-topPickup__slider js-topPickupSlider splide">
             <div class="splide__track">
               <ul class="splide__list">
-                <li class="splide__slide">Slide 01</li>
-                <li class="splide__slide">Slide 02</li>
-                <li class="splide__slide">Slide 03</li>
+                <li class="splide__slide">
+                  <a href="/" class="p-topPickup__slideFrame">
+                    <div class="p-topPickup__slideContainer">
+                      Slide 01
+                    </div>
+                  </a>
+                </li>
+                <li class="splide__slide">
+                  <a href="/" class="p-topPickup__slideFrame">
+                    <div class="p-topPickup__slideContainer">
+                      Slide 02
+                    </div>
+                  </a>
+                </li>
+                <li class="splide__slide">
+                  <a href="/" class="p-topPickup__slideFrame">
+                    <div class="p-topPickup__slideContainer">
+                      Slide 03
+                    </div>
+                  </a>
+                </li>
               </ul>
             </div>
-            <button class="splide__toggle" type="button">
-              <svg
-                class="splide__toggle__play"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="m22 12-20 11v-22l10 5.5z"/>
-              </svg>
-              <svg
-                class="splide__toggle__pause"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="m2 1v22h7v-22zm13 0v22h7v-22z"/>
-              </svg>
-            </button>
-            <div class="splide__progress">
+            <div class="p-topPickup__slideNav">
+              <ul class="splide__pagination js-topPickupSliderProgress"></ul>
+              <button class="splide__toggle" type="button">
+                <svg
+                  class="splide__toggle__play"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="m22 12-20 11v-22l10 5.5z"/>
+                </svg>
+                <svg
+                  class="splide__toggle__pause"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="m2 1v22h7v-22zm13 0v22h7v-22z"/>
+                </svg>
+              </button>
+            </div>
+            <!-- <div class="splide__progress">
               <div class="splide__progress__bar">
               </div>
-            </div>
+            </div> -->
           </div>
         </section>
       </main>

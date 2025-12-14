@@ -5,10 +5,17 @@ export const topPickupSlider = () => {
   const sliderElm = document.querySelector('.js-topPickupSlider');
   if (!sliderElm) return;
 
-  new Splide(sliderElm, {
+  const topPickupSlider = new Splide(sliderElm, {
     type       : 'loop',
     autoplay   : true,
     perPage    : 1,
     gap        : '1rem',
-  }).mount();
+  });
+
+  topPickupSlider.on( 'autoplay:playing', function ( rate ) {
+    const topPickupSliderProgress = sliderElm.querySelector('.js-topPickupSliderProgress');
+    topPickupSliderProgress.setAttribute('style', `--progress: ${rate * 100}%`);
+  });
+
+  topPickupSlider.mount();
 };
