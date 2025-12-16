@@ -37,6 +37,7 @@
     "@splidejs/splide": "^4.1.4",
     "gsap": "^3.14.1",
     "swup": "^4.8.2",
+    "three": "^0.182.0",
     "vite-plugin-html": "^3.2.0"
   }
 }

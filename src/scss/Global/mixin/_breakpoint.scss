@@ -1,23 +1,23 @@
-@use "sass:meta";
-@use "sass:map";
+@use 'sass:meta';
+@use 'sass:map';
 
 $breakpoints: (
-  "sm": (
+  'sm': (
     max-width: 576px,
   ),
-  "md": (
+  'md': (
     max-width: 768px,
   ),
-  "lg": (
+  'lg': (
     max-width: 992px,
   ),
-  "xl": (
+  'xl': (
     max-width: 1200px,
   ),
-  "xxl": (
+  'xxl': (
     max-width: 1400px,
   ),
-  "xxxl": (
+  'xxxl': (
     max-width: 1800px,
   ),
 ) !default;

@@ -6,14 +6,16 @@ export const topPickupSlider = () => {
   if (!sliderElm) return;
 
   const topPickupSlider = new Splide(sliderElm, {
-    type       : 'loop',
-    autoplay   : true,
-    perPage    : 1,
-    gap        : '1rem',
+    type: 'loop',
+    autoplay: true,
+    perPage: 1,
+    gap: '1rem',
   });
 
-  topPickupSlider.on( 'autoplay:playing', function ( rate ) {
-    const topPickupSliderProgress = sliderElm.querySelector('.js-topPickupSliderProgress');
+  topPickupSlider.on('autoplay:playing', function (rate) {
+    const topPickupSliderProgress = sliderElm.querySelector(
+      '.js-topPickupSliderProgress'
+    );
     topPickupSliderProgress.setAttribute('style', `--progress: ${rate * 100}%`);
   });
 

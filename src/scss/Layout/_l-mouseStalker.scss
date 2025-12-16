@@ -12,7 +12,8 @@
   z-index: 99999;
   pointer-events: none;
   overflow: hidden;
-  transition: width 0.2s ease, height 0.2s ease, box-shadow 0.2s ease, backdrop-filter 0.2s ease;
+  transition: width 0.2s ease, height 0.2s ease, box-shadow 0.2s ease,
+    backdrop-filter 0.2s ease;
 
   &::after {
     content: 'Click';

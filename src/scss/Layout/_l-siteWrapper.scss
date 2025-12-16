@@ -33,7 +33,6 @@ html.is-leaving .transition-main {
   filter: blur(4px);
 }
 
-
 html.is-animating.to-left .transition-main {
   opacity: 0;
   transform: translateX(48px);
@@ -48,7 +47,11 @@ html.is-leaving.to-left .transition-main {
 .transition-overlay {
   width: 48px;
   height: 48px;
-  background-image: linear-gradient(to right, var(--light-blue) 0%, var(--blue) 100%);
+  background-image: linear-gradient(
+    to right,
+    var(--light-blue) 0%,
+    var(--blue) 100%
+  );
   border-radius: 6px;
   position: fixed;
   top: 50%;
@@ -67,26 +70,29 @@ html.is-animating .transition-overlay {
 }
 
 html.is-rendering .transition-overlay {
-    opacity: 1;
-    visibility: visible;
-    animation: sk-rotateFirst 0.4s forwards ease-in-out;
+  opacity: 1;
+  visibility: visible;
+  animation: sk-rotateFirst 0.4s forwards ease-in-out;
 }
 
 @keyframes sk-rotateFirst {
-  0% { 
-    transform: translate(-50%, -50%) perspective(120px) rotateX(0deg) rotateY(0deg);
-  } 
-  100% { 
-    transform: translate(-50%, -50%) perspective(120px) rotateX(0deg) rotateY(180.1deg);
+  0% {
+    transform: translate(-50%, -50%) perspective(120px) rotateX(0deg)
+      rotateY(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) perspective(120px) rotateX(0deg)
+      rotateY(180.1deg);
   }
 }
 
 @keyframes sk-rotateLast {
-  0% { 
-    transform: translate(-50%, -50%) perspective(120px) rotateX(0deg) rotateY(180.1deg);
-  } 
-  100% { 
-    transform: translate(-50%, -50%) perspective(120px) rotateX(0deg) rotateY(360deg);
+  0% {
+    transform: translate(-50%, -50%) perspective(120px) rotateX(0deg)
+      rotateY(180.1deg);
   }
-  
+  100% {
+    transform: translate(-50%, -50%) perspective(120px) rotateX(0deg)
+      rotateY(360deg);
+  }
 }

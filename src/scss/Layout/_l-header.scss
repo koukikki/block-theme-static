@@ -1,4 +1,4 @@
-@use "../Global/" as *;
+@use '../Global/' as *;
 
 .l-header {
   width: calc(100% - 32px);
@@ -91,7 +91,6 @@
   }
 
   @include hover {
-
     span {
       transform: translateY(-1.6em);
     }
@@ -148,9 +147,7 @@
   }
 
   .l-header__menuButton {
-
     span {
-
       &:first-child {
         transform: translateY(5px);
       }
