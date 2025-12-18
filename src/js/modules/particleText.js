@@ -1,90 +1,128 @@
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 export const particleText = () => {
   const canvas = document.querySelector('.js-particleTextCanvas');
   if (!canvas) return;
 
-  // レンダラーの作成
+  /* --------------------
+   Renderer
+  -------------------- */
   const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
+    canvas,
     alpha: true,
+    antialias: true,
   });
 
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  renderer.setPixelRatio(1);
-  renderer.setSize(width, height);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
 
-  // シーンの作成
+  /* --------------------
+   Scene
+  -------------------- */
   const scene = new THREE.Scene();
 
-  // カメラの作成
-  const camera = new THREE.PerspectiveCamera(10, width / height);
-  camera.position.set(20, 1000, 200);
-  scene.add(camera);
+  /* --------------------
+   Camera
+  -------------------- */
+const aspect = window.innerWidth / window.innerHeight;
+const camera = new THREE.OrthographicCamera(
+  -500 * aspect,
+   500 * aspect,
+   500,
+  -500,
+  1,
+  2000
+);
 
-  const controls = new OrbitControls(camera);
+camera.position.set(0, 0, 1000);
+camera.lookAt(0, 0, 0);
+scene.add(camera);
 
-  // モデルを読み込み
-  const loader = new GLTFLoader();
-  const url = '/model/text-wb.glb';
+  /* --------------------
+   Controls
+  -------------------- */
+  const controls = new OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+  controls.target.set(0, 0, 0);
 
-  let model = null;
-  loader.load(
-    url,
-    function (gltf) {
-      model = gltf.scene;
-      model.name = 'model_with_cloth';
-      model.scale.set(100, 100, 100);
-      model.position.set(0, 0, 0);
-      scene.add(model);
-      console.log('GLB loaded');
-    },
-    undefined,
+  /* --------------------
+   Text Particles
+  -------------------- */
+  const fontLoader = new FontLoader();
+
+  fontLoader.load('/fonts/helvetiker_bold.typeface.json', (font) => {
+    createTextParticles(font, 'WB');
+  });
+
+  function createTextParticles(font, text) {
+  const shapes = font.generateShapes(text, 300);
+
+  const geometry = new THREE.ShapeGeometry(shapes);
+  geometry.center();
+
+  const pos = geometry.attributes.position.array;
+
+  const points = [];
+
+  const skip = 2; 
+  // ↑ 数値を上げるほど軽く・荒くなる
+  //   1: 密 / 2〜3: おすすめ / 5: かなり軽い
+
+  for (let i = 0; i < pos.length; i += 9 * skip) {
+    points.push(
+      pos[i],     // x
+      pos[i + 1], // y
+      pos[i + 2]  // z
+    );
+  }
+
+  const particleGeometry = new THREE.BufferGeometry();
+  particleGeometry.setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute(points, 3)
   );
 
-  renderer.gammaOutput = true;
-  renderer.gammaFactor = 2.2;
+  const material = new THREE.PointsMaterial({
+    color: 0x000000,
+    size: 6,
+    sizeAttenuation: true,
+  });
 
-  // 平行光源
-  const light = new THREE.DirectionalLight(0xffffff);
-  light.intensity = 2; // 光の強さを倍に
-  light.position.set(1, 1, 1);
-  // シーンに追加
+  const particles = new THREE.Points(particleGeometry, material);
+  scene.add(particles);
+}
+
+
+
+  /* --------------------
+   Light（最低限）
+  -------------------- */
+  const light = new THREE.AmbientLight(0x000000, 1);
   scene.add(light);
 
-  // 初回実行
-  tick();
+  /* --------------------
+   Animation Loop
+  -------------------- */
   function tick() {
     controls.update();
-
-    scene.traverse(function (obj) {
-      if (obj.name == 'J_Bip_C_Chest') {
-        obj.rotation.z += (2 / 180) * 3.1415;
-      }
-    });
     renderer.render(scene, camera);
     requestAnimationFrame(tick);
   }
+  tick();
 
-  // 初期化のために実行
-  onResize();
-  // リサイズイベント発生時に実行
-  window.addEventListener('resize', onResize);
-  function onResize() {
-    // サイズを取得
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+  /* --------------------
+   Resize
+  -------------------- */
+  window.addEventListener('resize', () => {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
 
-    // レンダラーのサイズを調整する
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(width, height);
+    renderer.setSize(w, h);
 
-    // カメラのアスペクト比を正す
-    camera.aspect = width / height;
+    camera.aspect = w / h;
     camera.updateProjectionMatrix();
-    console.log(width);
-  }
+  });
 };
