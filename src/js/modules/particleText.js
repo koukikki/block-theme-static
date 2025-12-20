@@ -53,47 +53,43 @@ scene.add(camera);
   const fontLoader = new FontLoader();
 
   fontLoader.load('/fonts/helvetiker_bold.typeface.json', (font) => {
-    createTextParticles(font, 'WB');
+    createTextParticles(font, 'W');
   });
 
   function createTextParticles(font, text) {
-  const shapes = font.generateShapes(text, 300);
+    const shapes = font.generateShapes(text, 200);
 
-  const geometry = new THREE.ShapeGeometry(shapes);
-  geometry.center();
+    const geometry = new THREE.ShapeGeometry(shapes);
+    geometry.center();
 
-  const pos = geometry.attributes.position.array;
+    const position = geometry.attributes.position;
+    const count = position.count;
 
-  const points = [];
+    const positions = new Float32Array(count * 3);
 
-  const skip = 2; 
-  // ↑ 数値を上げるほど軽く・荒くなる
-  //   1: 密 / 2〜3: おすすめ / 5: かなり軽い
+    for (let i = 0; i < count; i++) {
+      positions[i * 3 + 0] = position.getX(i);
+      positions[i * 3 + 1] = position.getY(i);
+      positions[i * 3 + 2] = position.getZ(i);
+    }
 
-  for (let i = 0; i < pos.length; i += 9 * skip) {
-    points.push(
-      pos[i],     // x
-      pos[i + 1], // y
-      pos[i + 2]  // z
+    const particleGeometry = new THREE.BufferGeometry();
+    particleGeometry.setAttribute(
+      'position',
+      new THREE.BufferAttribute(positions, 3)
     );
+
+    const material = new THREE.PointsMaterial({
+      color: 0x000000,
+      size: 4,
+      sizeAttenuation: true,
+      transparent: true,
+      opacity: 1,
+    });
+
+    const points = new THREE.Points(particleGeometry, material);
+    scene.add(points);
   }
-
-  const particleGeometry = new THREE.BufferGeometry();
-  particleGeometry.setAttribute(
-    'position',
-    new THREE.Float32BufferAttribute(points, 3)
-  );
-
-  const material = new THREE.PointsMaterial({
-    color: 0x000000,
-    size: 6,
-    sizeAttenuation: true,
-  });
-
-  const particles = new THREE.Points(particleGeometry, material);
-  scene.add(particles);
-}
-
 
 
   /* --------------------
