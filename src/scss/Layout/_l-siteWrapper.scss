@@ -63,13 +63,13 @@ html.is-leaving.to-left .transition-main {
   transition: opacity 0.15s ease, visibility 0.15s ease;
 }
 
-.transition-overlay.is-visible {
+html.is-animating .transition-overlay {
   opacity: 1;
   visibility: visible;
   animation: sk-rotateLast 0.4s forwards ease-in-out;
 }
 
-.transition-overlay.is-last {
+html.is-rendering .transition-overlay {
   opacity: 1;
   visibility: visible;
   animation: sk-rotateFirst 0.4s forwards ease-in-out;
